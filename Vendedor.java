@@ -26,9 +26,9 @@ public class Vendedor{
 		}//Default
 
 		//Constructor con todas las variables
-	public Vendedor(double comision, int codigo, String primer,
-	String segundo, String primer_a, String segundo_a, double sueldo, double[] ven_men, double total){
-		this.comision = comision;
+	public Vendedor(String primer,
+	String segundo, String primer_a, String segundo_a, double sueldo, double[] ven_men){
+
 		this.codigo = generar_codigo();
 		this.primer_nombre = primer;
 		this.segundo_nombre = segundo;
@@ -36,8 +36,11 @@ public class Vendedor{
 		this.segundo_apellido = segundo_a;
 		this.sueldo_base = sueldo;
 		this.ventas_mensuales = ven_men;
+		double total = 0.0;
+		for(int i = 0;i<ventas_mensuales.length;i++)
+			total += ventas_mensuales[i];
 		this.total_anual = total;
-
+		this.comision = calc_comision();
 
 
 		}// TODAS LAS VARIABLES
@@ -67,9 +70,9 @@ public static void comenzar(){
 
 
 	//Calcula la comision dependiendo de las ventas anuales del vendedor;
-public double clac_comision(){
+public double calc_comision(){
 
-	return 0;
+	return 0.0;
 	}//calc_comision
 
 
@@ -156,6 +159,13 @@ public void set_ventas_mensuales(double[] ven){
 	else
 	C.error("Los vectores no tienen las mismas direcciones");
 
+	}
+
+public void set_calc_total_anual(double[] ventas_mensuales){
+	double total = 0.0;
+			for(int i = 0;i<ventas_mensuales.length;i++)
+				total += ventas_mensuales[i];
+		this.total_anual = total;
 	}
 
 public void set_total_anual(double total){

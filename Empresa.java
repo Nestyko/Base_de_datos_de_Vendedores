@@ -104,6 +104,8 @@ public static byte menu(){
 			C.pausa("Presione enter para continuar");
 			}
 		nuevo.set_ventas_mensuales(vent);
+		nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
+
 
 
 		int prueba = vendedores.size();
