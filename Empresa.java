@@ -83,6 +83,19 @@ public class Empresa{
 					break;
 
 					}//case 3
+				case 4:{
+						for(int i = 0; i < vendedores.size();i++){
+							C.outSln("Vendedor " + (i+1) + ": " + vendedores.get(i).get_nombre_completo());
+							C.outSln("Codigo: " + vendedores.get(i).get_codigo());
+							C.endl(1);
+							}//for
+							C.espacio(10);
+							byte mod = C.in_Byte("Seleccione un vededor para modificar: ");
+
+							C.pausa();
+					}//case 4
+
+
 				case 9:{
 					ing_datos_aleatorios();
 					opc = 0;
@@ -104,23 +117,43 @@ public class Empresa{
 
 
 public static byte menu(){
-	byte opc;
-	C.separador();
-	C.outCenln("Empresa X");
-	C.endl(1);
-	C.separador();
-	C.espacio(40);
-	C.outln("Numero de Vendedores registrados: " + vendedores.size());
-	C.endl(1);
-	C.outSln("0.- Salir del Programa");
-	C.outSln("1.- Ingresar datos de un Vendedor");
-	C.outSln("2.- Mostrar datos de los Vendedores");
-	C.outSln("3.- Mostrar las ganancias obtenidas por la empresa");
-	C.endl(2);
-	C.outSln("9.- Generar datos aleatorios");
-	C.endl(1);
-	opc = C.in_byte("Seleccione una opcion: [ ]\b\b");
-	return opc;
+
+   byte opc;
+	if(vendedores.size() > 0){
+			C.separador();
+				C.outCenln("Empresa X");
+				C.endl(1);
+				C.separador();
+				C.espacio(40);
+				C.outln("Numero de Vendedores registrados: " + vendedores.size());
+				C.endl(1);
+				C.outSln("0.- Salir del Programa");
+				C.outSln("1.- Ingresar datos de un Vendedor");
+				C.outSln("2.- Mostrar datos de los Vendedores");
+				C.outSln("3.- Mostrar las ganancias obtenidas por la empresa");
+				C.outSln("4.- Modificar datos de algun vendedor");
+				C.endl(2);
+				C.outSln("9.- Generar datos aleatorios");
+				C.endl(1);
+				opc = C.in_byte("Seleccione una opcion: [ ]\b\b");
+		return opc;
+							}
+						else{
+				C.separador();
+				C.outCenln("Empresa X");
+				C.endl(1);
+				C.separador();
+				C.espacio(40);
+				C.outln("Numero de Vendedores registrados: " + vendedores.size());
+				C.endl(1);
+				C.outSln("0.- Salir del Programa");
+				C.outSln("1.- Ingresar datos de un Vendedor");
+				C.endl(2);
+				C.outSln("9.- Generar datos aleatorios");
+				C.endl(1);
+				opc = C.in_byte("Seleccione una opcion: [ ]\b\b");
+		return opc;
+							}//else
 
 	}//menu
 
@@ -155,12 +188,6 @@ public static byte menu(){
 
 		Vendedor nuevo = new Vendedor(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,
 			sueldo_base, vent);
-
-
-
-		//nuevo.set_ventas_mensuales(vent);
-		//nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
-
 
 
 		int prueba = vendedores.size();
@@ -204,12 +231,6 @@ public static byte menu(){
 					sueldo_base, vent);
 
 
-
-				//nuevo.set_ventas_mensuales(vent);
-				//nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
-
-
-
 				int prueba = vendedores.size();
 				//Agregar el nuevo vendedor al vector
 				vendedores.add(nuevo);
@@ -218,5 +239,37 @@ public static byte menu(){
 				else
 				return false;
 		}//ing_datos_aleatorios
+
+public static void mod_datos(byte mod){
+
+		vendedores.get(mod).set_primer_nombre(C.in_String("Primer Nombre: ");
+		C.endl(1);
+		vendedores.get(mod).set_segundo_nombre(C.in_String("Segundo Nombre: ");
+		C.endl(1);
+		vendedores.get(mod).set_primer_apellido(C.in_String("Primer Apellido: ");
+		C.endl(1);
+		vendedores.get(mod).set_segundo_apellido(C.in_String("Segundo Apellido: ");
+		C.endl(1);
+		vendedores.get(mod).set_sueldo_base(C.in_double("Sueldo Base: ");
+		C.endl(1);
+
+		double[] vent = new double[12];
+		try{
+		for(int i = 0;i<12;i++){
+			vent[i] = C.in_double("Ventas de " + meses[i] + ": ");
+			C.endl(1);
+			}//for
+		}//try
+		catch(Exception e){
+			C.error();
+			C.pausa("Presione enter para continuar");
+			}
+
+		vendedores.get(mod).set_ventas_mensuales(vent);
+
+		//Agregar el nuevo vendedor al vector
+
+
+		}//ing_datos
 
 }//class

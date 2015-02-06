@@ -127,7 +127,6 @@ public void Mostrar(){
 
 
 
-
 	//Calcula la comision dependiendo de las ventas anuales del vendedor;
 public double calc_comision(){
 		if(total_anual <= 1500000){
@@ -154,6 +153,12 @@ public double calc_comision(){
 public final double get_comision(){
 	return this.comision;
 	}
+
+	public final String get_nombre_completo(){
+				return  (primer_nombre + " " + segundo_nombre + " " + primer_apellido + " " + segundo_apellido);
+			}//Mostrar_nombres
+
+
 
 public final int get_codigo(){
 	return this.codigo;
