@@ -214,10 +214,14 @@ public static void pausa(){
 					a = Byte.parseByte(KbInput.read());
 					err = false;
 				}//try
-				catch(Exception e){
-						error();
+				catch(NumberFormatException e1){
+						error("Error en el formato del numero");
 						err = true;
-					}//catch
+					}
+					catch(Exception e2){
+							error();
+							err = true;
+					}
 				}while(err);
 
 			return a;

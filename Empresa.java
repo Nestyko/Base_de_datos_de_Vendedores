@@ -5,10 +5,12 @@ public class Empresa{
 
 	public static int contador_vend = 0;
 
+	public static ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+
 	public static void main(String[] args){
 
 		//Declaracion del ArrayList en donde se guardara todos los vendedores
-		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+
 
 			byte opc;
 			do{

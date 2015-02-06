@@ -2,6 +2,7 @@ public class Vendedor{
 
 	private static int cant_vendedores;
 	private static double balance;
+	private int contador_codigo;
 
 	private double comision;
 	private int codigo;
@@ -13,7 +14,7 @@ public class Vendedor{
 		//Constructor Default
 	public Vendedor(){
 		comision = 0.0;
-		codigo = 0;
+		codigo = generar_codigo;
 		primer_nombre = null;
 		segundo_nombre = null;
 		primer_apellido = null;
@@ -28,7 +29,7 @@ public class Vendedor{
 	public Vendedor(double comision, int codigo, String primer,
 	String segundo, String primer_a, String segundo_a, double sueldo, double[] ven_men, double total){
 		this.comision = comision;
-		this.codigo = codigo;
+		this.codigo = generar_codigo();
 		this.primer_nombre = primer;
 		this.segundo_nombre = segundo;
 		this.primer_apellido = primer_a;
@@ -37,25 +38,10 @@ public class Vendedor{
 		this.ventas_mensuales = ven_men;
 		this.total_anual = total;
 
-		cant_vendedores++;
+
 
 		}// TODAS LAS VARIABLES
 
-	public Vendedor(double comision, String primer,
-		String segundo, String primer_a, String segundo_a, double sueldo, double[] ven_men, double total){
-			this.comision = comision;
-			this.codigo = generar_codigo();
-			this.primer_nombre = primer;
-			this.segundo_nombre = segundo;
-			this.primer_apellido = primer_a;
-			this.segundo_apellido = segundo_a;
-			this.sueldo_base = sueldo;
-			this.ventas_mensuales = ven_men;
-			this.total_anual = total;
-
-			cant_vendedores++;
-
-		}// TODAS LAS VARIABLES
 
 
 	//Coloca en todas las posiciones del vector el valor de 0.0
@@ -66,14 +52,16 @@ public double[] inicializar_vector(double[] vec){
 		return vec;
 	}
 
-			//Genera un codigo aleatorio
+			//Genera un codigo aleatorio irrepetible
 
 public int generar_codigo(){
+	contador_codigo++;
+	this.codigo = contador_codigo;
 	return 0;
 	}
 
 public static void comenzar(){
-	cant_vendedores = 0;
+	contador_codigo = 10000;
 	balance = 0.0;
 	}
 
@@ -126,10 +114,12 @@ public final double get_total_anual(){
 				//Funciones para guardar valores en las variables (set functions)
 
 public void set_comision(double comision){
+	System.out.println("Comision ingresada manualmente");
 	this.comision = comision;
 	}//set_comision
 
 public void set_codigo(int cod){
+	System.out.println("Codigo ingresado manualmente");
 	this.codigo = cod;
 	}//set_codigo
 
