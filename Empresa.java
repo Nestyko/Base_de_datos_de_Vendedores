@@ -75,21 +75,21 @@ public static byte menu(){
 
 
 	public static boolean ing_datos(){
-		Vendedor nuevo = new Vendedor();
+		
 		C.espacio(10);
-		nuevo.set_primer_nombre(C.in_String("Primer Nombre: "));
+		String primer_nombre = (C.in_String("Primer Nombre: "));
 		C.endl(1);
 		C.espacio(10);
-		nuevo.set_segundo_nombre(C.in_String("Segundo Nombre: "));
+		String segundo_nombre = (C.in_String("Segundo Nombre: "));
 		C.endl(1);
 		C.espacio(10);
-		nuevo.set_primer_apellido(C.in_String("Primer Apellido: "));
+		String primer_apellido = (C.in_String("Primer Apellido: "));
 		C.endl(1);
 		C.espacio(10);
-		nuevo.set_segundo_apellido(C.in_String("Segundo Apellido: "));
+		String segundo_apellido = (C.in_String("Segundo Apellido: "));
 		C.endl(1);
 		C.espacio(10);
-		nuevo.set_sueldo_base(C.in_double("Sueldo Base: "));
+		double sueldo_base = (C.in_double("Sueldo Base: "));
 		C.endl(1);
 		double[] vent = new double[12];
 		try{
@@ -103,8 +103,14 @@ public static byte menu(){
 			C.error();
 			C.pausa("Presione enter para continuar");
 			}
-		nuevo.set_ventas_mensuales(vent);
-		nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
+		
+		Vendedor nuevo = new Vendedor(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,
+			sueldo_base, vent);
+		
+		
+			
+		//nuevo.set_ventas_mensuales(vent);
+		//nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
 
 
 
