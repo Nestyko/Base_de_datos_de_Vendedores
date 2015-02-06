@@ -6,7 +6,7 @@ public static void cls(){
 	System.out.println("\n");
 }
 
-//Agrega una sangría al texto
+//Agrega una sangrÃ­a al texto
 public static void outS(String msg){
 	espacio(10);
 	System.out.print(msg);
@@ -43,7 +43,7 @@ public static void outCenln(String mensaje){
 public static void separador(){
 	for(int i = 0;i<80;i++)
 	System.out.print("-");
-	//endl(1);
+	endl(1);
 }
 
 //Imprime el mensaje
@@ -64,7 +64,7 @@ public static void out(String mensaje){
 //Agrega tantas lineas como lo indique n
 public static void endl(int n){
 	for(int i = 0;i < n;i++)
-	System.out.println("\n");
+	System.out.print("\n");
 }
 
 public static void error(String errorMsg){
@@ -314,7 +314,7 @@ public static void pausa(){
 	}//in_String
 
 							//LEER VECTORES
-					//Los vectores tienen que estar incializado, es decir, deben de tener un tamaño prestablecido
+					//Los vectores tienen que estar incializado, es decir, deben de tener un tamaÃ±o prestablecido
 					//String elemento: es el objeto abstracto del que esta hecho el objeto, es decir, si el vector guarda sueldos, o trabajadores, etc
 
 
