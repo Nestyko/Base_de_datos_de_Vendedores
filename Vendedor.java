@@ -71,7 +71,21 @@ public static void comenzar(){
 
 	//Calcula la comision dependiendo de las ventas anuales del vendedor;
 public double calc_comision(){
-
+		if(totlal_anual <= 1500000){
+			return total_anual*(1.5/100);
+		}
+		if(total_anual > 1500000) || (total_anual <= 2150000){
+			return total_anual*(4.75/100);
+		}
+		if(total_anual > 2150000) || (total_anual <= 2900000){
+			return total_anual*(7.75/100);
+		}
+		if(total_anual > 2900000) || (total_anual <= 3350000){
+			return total_anual*(9.6/100);
+		}
+		if(total_anual > 3350000){
+			return total_anual*(11.85/100);
+		}
 	return 0.0;
 	}//calc_comision
 
