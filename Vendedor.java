@@ -59,12 +59,12 @@ public double[] inicializar_vector(double[] vec){
 		return vec;
 	}
 
-			//Genera un codigo aleatorio irrepetible
+			//Genera un codigo irrepetible
 
 public int generar_codigo(){
-	contador_codigo = contador_codigo+1;
+	cambiar_codigo();
 	this.codigo = contador_codigo;
-	return contador_codigo;
+	return codigo;
 	}
 
 public static void comenzar(){
@@ -72,11 +72,14 @@ public static void comenzar(){
 	balance = 0.0;
 	}
 
+public static void cambiar_codigo(){
+	contador_codigo = contador_codigo + 1;
+	}
+
 
 	//Muestra los datos en pantalla
 
 public void Mostrar(){
-	if(contador_codigo > 10000){
 
 			C.outSln("Codigo: " + codigo);
 			C.outSln("Vendedor: " + primer_nombre + " " + segundo_nombre + " " + primer_apellido + " " + segundo_apellido);
@@ -103,13 +106,25 @@ public void Mostrar(){
 			C.outS("Total anual: " + total_anual); C.espacio(70-13-((total_anual+"").length())-35);//Que locura ;)
 			C.outSln("Comision: " + comision);
 			C.endl(1);
+			C.pausa();
 
-		}
-	else{
-
-		}
 
 	}//Mostrar
+
+	public static void Mostrar_balance(){
+		C.separador();
+			C.outCenln("Empresa X");
+			C.endl(1);
+			C.separador();
+			C.endl(1);
+			C.outSln("Ganancia sin retenciones: " + balance);
+			C.outSln("Total de impuesto: " + (balance*0.12));
+			C.endl(2);
+			C.outSln("Total de Ganancia: " + (balance-(balance*0.12)));
+			C.endl(2);
+
+		}
+
 
 
 

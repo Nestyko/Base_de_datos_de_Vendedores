@@ -36,7 +36,7 @@ public class Empresa{
 			C.cls();
 			switch(opc){
 				case 0:{
-					opc = 0;
+					opc = 1;
 					continue;
 
 					}
@@ -55,11 +55,13 @@ public class Empresa{
 						break;
 
 
-				}
+				}//case 1
 				case 2:{
 					if(vendedores.size() > 0){
-						vendedores.get(0).Mostrar();
-						}
+						for(int i = 0; i < vendedores.size();i++){
+						vendedores.get(i).Mostrar();
+						}//for
+					}//if
 					else{
 						C.errorCen("No hay datos cargados");
 						opc = 1;
@@ -67,18 +69,31 @@ public class Empresa{
 						}
 
 					break;
-				}
+				}//case 2
+				case 3:{
+					if(vendedores.size() > 0){
+						Vendedor.Mostrar_balance();
+						}
+					else{
+					C.errorCen("No hay datos cargados");
+						opc = 1;
+						continue;
+							}
+
+					break;
+
+					}//case 3
 				case 9:{
 					ing_datos_aleatorios();
-					opc = 1;
+					opc = 0;
 					continue;
 
-					}
+					}//case 9
 				default:{
 					C.error("Seleccion Invalida");
 					break;
-				}
-			}
+				}//default
+			}//switch
 			C.espacio(10);
 			opc = C.in_byte("Si desea Salir del programa Presione 1: ");
 
@@ -100,6 +115,7 @@ public static byte menu(){
 	C.outSln("0.- Salir del Programa");
 	C.outSln("1.- Ingresar datos de un Vendedor");
 	C.outSln("2.- Mostrar datos de los Vendedores");
+	C.outSln("3.- Mostrar las ganancias obtenidas por la empresa");
 	C.endl(2);
 	C.outSln("9.- Generar datos aleatorios");
 	C.endl(1);
@@ -158,7 +174,7 @@ public static byte menu(){
 
 		public static boolean ing_datos_aleatorios(){
 
-				String primer_nombre = "SE\245OR";
+				String primer_nombre = "MISTER";
 				C.endl(1);
 
 				String segundo_nombre = "ALEATORIO";
