@@ -56,10 +56,31 @@ public static void espacio(int n){
 	System.out.print(" ");
 }
 
-//Imprime el mensaje y le agrega una linea
+//Imprime el mensaje
 public static void out(String mensaje){
 	System.out.print(mensaje);
 }
+
+public static void out(int mensaje){
+	System.out.print(mensaje);
+}
+
+public static void out(double mensaje){
+	System.out.print(mensaje);
+}
+
+public static void out(short mensaje){
+	System.out.print(mensaje);
+}
+
+public static void out(long mensaje){
+	System.out.print(mensaje);
+}
+
+public static void out(byte mensaje){
+	System.out.print(mensaje);
+}
+
 
 //Agrega tantas lineas como lo indique n
 public static void endl(int n){
@@ -68,17 +89,26 @@ public static void endl(int n){
 }
 
 public static void error(String errorMsg){
-	System.out.println("E\tR\tR\tO\tR");
 	endl(1);
+	System.out.println("E\tR\tR\tO\tR");
 	System.out.println("DESCRIPCION: " + errorMsg);
 	C.endl(1);
 	System.out.println("PRESIONE ENTER PARA CONTINUAR");
 	KbInput.read();
 }
 
-
+public static void errorCen(String errorMsg){
+	endl(1);
+	C.espacio(24);
+	C.outln("E\tR\tR\tO\tR");
+	C.outCenln("DESCRIPCION: " + errorMsg);
+	C.endl(1);
+	C.outCenln("PRESIONE ENTER PARA CONTINUAR");
+	KbInput.read();
+}
 
 public static void error(){
+	endl(1);
 	C.espacio(24);
 	System.out.println("E\tR\tR\tO\tR");
 	C.outCenln("PRESIONE ENTER PARA CONTINUAR");
@@ -95,6 +125,106 @@ public static void pausa(){
 	C.endl(1);
 	KbInput.read();
 }
+
+	//Imprime Strings de menos de 10 caracteres en forma de fila
+	//Llena la pantalla si empieza en el espacio 8
+
+public static  void imprimir_fila(String[] vec){
+	if (vec.length > 6){
+	for (int i = 0; i < 6;i++){
+					C.out(vec[i]);
+					if(i < 6){
+					C.espacio(12-((vec[i]).length()));
+				}//if
+				}//for
+			}//if
+		else{
+			for (int i = 0; i < vec.length;i++){
+								C.out(vec[i]);
+								if(i < vec.length){
+								C.espacio(12-((vec[i]).length()));
+							}//if
+				}//for
+			}//else
+		}//imprimir
+
+		//Empieza el vector desde la posicion i
+
+public static  void imprimir_fila(String[] vec, int i){
+
+			for (; i < vec.length;i++){
+								C.out(vec[i]);
+								if(i < vec.length){
+								C.espacio(12-((vec[i]).length()));
+							}//if
+				}//for
+		}//imprimir
+
+	//Imprime Integers de menos de 10 caracteres en forma de fila
+	//Llena la pantalla si empieza en el espacio 8
+
+public static  void imprimir_fila(int[] vec){
+	if (vec.length > 6){
+	for (int i = 0; i < 6;i++){
+					C.out(vec[i]);
+					if(i < 6){
+					C.espacio(12-((vec[i]+"").length()));
+				}//if
+				}//for
+			}//if
+		else{
+			for (int i = 0; i < vec.length;i++){
+								C.out(vec[i]);
+								if(i < vec.length){
+								C.espacio(12-((vec[i]+"").length()));
+							}//if
+				}//for
+			}//else
+		}//imprimir
+
+	//Imprime Doubles de menos de 10 caracteres en forma de fila
+	//Llena la pantalla si empieza en el espacio 8
+
+public static  void imprimir_fila(double[] vec){
+	if (vec.length > 6){
+	for (int i = 0; i < 6;i++){
+					C.out(vec[i]);
+					if(i < 6){
+					C.espacio(12-((vec[i]+"").length()));
+				}//if
+				}//for
+			}//if
+		else{
+			for (int i = 0; i < vec.length;i++){
+								C.out(vec[i]);
+								if(i < vec.length){
+								C.espacio(12-((vec[i]+"").length()));
+							}//if
+				}//for
+			}
+		}
+
+		//Empieza el vector desde la posicion i
+
+		public static  void imprimir_fila(double[] vec, int i){
+
+					for (; i < vec.length;i++){
+										C.out(vec[i]);
+										if(i < vec.length){
+										C.espacio(12-((vec[i]+"").length()));
+									}//if
+						}//for
+		}//imprimir
+
+		public static  void imprimir_fila(int[] vec, int i){
+
+							for (; i < vec.length;i++){
+												C.out(vec[i]);
+												if(i < vec.length){
+												C.espacio(12-((vec[i]+"").length()));
+											}//if
+								}//for
+		}//imprimir
 
 								//SENTENCIAS DE LECTURA
 
@@ -120,7 +250,7 @@ public static void pausa(){
 		boolean err = false;
 		do{
 		try {
-			System.out.print(msg);
+			C.outS(msg);
 			a = Double.parseDouble(KbInput.read());
 			err = false;
 		}//try
@@ -138,7 +268,7 @@ public static void pausa(){
 			boolean err = false;
 			do{
 			try {
-				System.out.print(msg);
+				C.outS(msg);
 				a = Integer.parseInt(KbInput.read());
 				err = false;
 			}//try
@@ -173,7 +303,7 @@ public static void pausa(){
 				boolean err = false;
 				do{
 				try {
-					System.out.print(msg);
+					C.outS(msg);
 					a = Short.parseShort(KbInput.read());
 					err = false;
 				}//try
@@ -209,7 +339,7 @@ public static void pausa(){
 				boolean err = false;
 				do{
 				try {
-					System.out.print(msg);
+					C.outS(msg);
 					a = Byte.parseByte(KbInput.read());
 					err = false;
 				}//try
@@ -248,7 +378,7 @@ public static void pausa(){
 					boolean err = false;
 					do{
 					try {
-						System.out.print(msg);
+						C.outS(msg);
 						a = Long.parseLong(KbInput.read());
 						err = false;
 					}//try
@@ -283,7 +413,7 @@ public static void pausa(){
 					boolean err = false;
 					do{
 					try {
-						System.out.print(msg);
+						C.outS(msg);
 						a = (KbInput.read());
 						err = false;
 					}//try

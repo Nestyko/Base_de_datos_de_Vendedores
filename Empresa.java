@@ -5,7 +5,7 @@
 
 
 import java.util.ArrayList;
-
+import java.util.Random;
 
 
 public class Empresa{
@@ -13,13 +13,20 @@ public class Empresa{
 	public final static String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 	"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
-	public static int contador_vend = 0;
-
+	//Declaracion del ArrayList en donde se guardara todos los vendedores
 	public static ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+
+	//Declarar el objeto de Los numeros aleatorios
+	public static Random aleatorio = new Random(System.currentTimeMillis());
 
 	public static void main(String[] args){
 
-		//Declaracion del ArrayList en donde se guardara todos los vendedores
+		//Inicializar las varialbes estaticas de la clase Vendedor
+		Vendedor.comenzar();
+
+
+
+
 
 			boolean datos_exito;
 			byte opc;
@@ -50,18 +57,32 @@ public class Empresa{
 
 				}
 				case 2:{
+					if(vendedores.size() > 0){
+						vendedores.get(0).Mostrar();
+						}
+					else{
+						C.errorCen("No hay datos cargados");
+						opc = 1;
+						continue;
+						}
 
 					break;
 				}
+				case 9:{
+					ing_datos_aleatorios();
+					opc = 1;
+					continue;
+
+					}
 				default:{
 					C.error("Seleccion Invalida");
 					break;
 				}
 			}
 			C.espacio(10);
-			opc = C.in_byte("Si desea volver al Menu Inicial ingrese 1: ");
+			opc = C.in_byte("Si desea Salir del programa Presione 1: ");
 
-		}while(opc != 0);
+		}while(opc != 1);
 
 
 	}//main
@@ -71,11 +92,17 @@ public static byte menu(){
 	byte opc;
 	C.separador();
 	C.outCenln("Empresa X");
+	C.endl(1);
 	C.separador();
+	C.espacio(40);
+	C.outln("Numero de Vendedores registrados: " + vendedores.size());
+	C.endl(1);
 	C.outSln("0.- Salir del Programa");
 	C.outSln("1.- Ingresar datos de un Vendedor");
+	C.outSln("2.- Mostrar datos de los Vendedores");
+	C.endl(2);
+	C.outSln("9.- Generar datos aleatorios");
 	C.endl(1);
-	C.espacio(10);
 	opc = C.in_byte("Seleccione una opcion: [ ]\b\b");
 	return opc;
 
@@ -83,26 +110,24 @@ public static byte menu(){
 
 
 	public static boolean ing_datos(){
-		
-		C.espacio(10);
+
 		String primer_nombre = (C.in_String("Primer Nombre: "));
 		C.endl(1);
-		C.espacio(10);
+
 		String segundo_nombre = (C.in_String("Segundo Nombre: "));
 		C.endl(1);
-		C.espacio(10);
+
 		String primer_apellido = (C.in_String("Primer Apellido: "));
 		C.endl(1);
-		C.espacio(10);
+
 		String segundo_apellido = (C.in_String("Segundo Apellido: "));
 		C.endl(1);
-		C.espacio(10);
+
 		double sueldo_base = (C.in_double("Sueldo Base: "));
 		C.endl(1);
 		double[] vent = new double[12];
 		try{
 		for(int i = 0;i<12;i++){
-			C.espacio(10);
 			vent[i] = C.in_double("Ventas de " + meses[i] + ": ");
 			C.endl(1);
 			}//for
@@ -111,12 +136,12 @@ public static byte menu(){
 			C.error();
 			C.pausa("Presione enter para continuar");
 			}
-		
+
 		Vendedor nuevo = new Vendedor(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,
 			sueldo_base, vent);
-		
-		
-			
+
+
+
 		//nuevo.set_ventas_mensuales(vent);
 		//nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
 
@@ -130,5 +155,52 @@ public static byte menu(){
 		else
 		return false;
 		}//ing_datos
+
+		public static boolean ing_datos_aleatorios(){
+
+				String primer_nombre = "SE\245OR";
+				C.endl(1);
+
+				String segundo_nombre = "ALEATORIO";
+				C.endl(1);
+
+				String primer_apellido = "";
+				C.endl(1);
+
+				String segundo_apellido = "";
+				C.endl(1);
+
+				double sueldo_base = aleatorio.nextInt(100000);
+				C.endl(1);
+				double[] vent = new double[12];
+				try{
+				for(int i = 0;i<12;i++){
+					vent[i] = aleatorio.nextInt(9999999);
+					C.endl(1);
+					}//for
+				}//try
+				catch(Exception e){
+					C.error();
+					C.pausa("Presione enter para continuar");
+					}
+
+				Vendedor nuevo = new Vendedor(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,
+					sueldo_base, vent);
+
+
+
+				//nuevo.set_ventas_mensuales(vent);
+				//nuevo.set_calc_total_anual(nuevo.get_ventas_mensuales());
+
+
+
+				int prueba = vendedores.size();
+				//Agregar el nuevo vendedor al vector
+				vendedores.add(nuevo);
+				if(vendedores.size() == prueba+1)
+				return true;
+				else
+				return false;
+		}//ing_datos_aleatorios
 
 }//class

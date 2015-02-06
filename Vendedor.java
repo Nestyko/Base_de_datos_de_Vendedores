@@ -1,8 +1,12 @@
+
+
 public class Vendedor{
 
-	private static int cant_vendedores;
-	private static double balance;
+	private static double balance;//balance de la empresa sin tomar en cuenta el IMPUESTO
 	private static int contador_codigo;
+
+	public final static String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+	"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
 	private double comision;
 	private int codigo;
@@ -22,7 +26,6 @@ public class Vendedor{
 		sueldo_base = 0.0;
 		ventas_mensuales = inicializar_vector(ventas_mensuales);
 		total_anual = 0.0;
-		cant_vendedores++;
 		}//Default
 
 		//Constructor con todas las variables
@@ -41,6 +44,7 @@ public class Vendedor{
 			total += ventas_mensuales[i];
 		this.total_anual = total;
 		this.comision = calc_comision();
+		balance += (total_anual - (comision+sueldo_base));
 
 
 		}// TODAS LAS VARIABLES
@@ -58,9 +62,9 @@ public double[] inicializar_vector(double[] vec){
 			//Genera un codigo aleatorio irrepetible
 
 public int generar_codigo(){
-	contador_codigo++;
+	contador_codigo = contador_codigo+1;
 	this.codigo = contador_codigo;
-	return 0;
+	return contador_codigo;
 	}
 
 public static void comenzar(){
@@ -69,18 +73,58 @@ public static void comenzar(){
 	}
 
 
+	//Muestra los datos en pantalla
+
+public void Mostrar(){
+	if(contador_codigo > 10000){
+
+			C.outSln("Codigo: " + codigo);
+			C.outSln("Vendedor: " + primer_nombre + " " + segundo_nombre + " " + primer_apellido + " " + segundo_apellido);
+			C.outSln("Sueldo base: " + sueldo_base);
+			C.outSln("Sueldo + comision: " +sueldo_base+ comision);
+
+			//Imprimir los meses en forma de Fila
+			C.separador();
+			C.out("Meses: ");
+			C.espacio(1);
+			C.imprimir_fila(meses);
+			C.separador();
+			C.espacio(8);
+			C.imprimir_fila(ventas_mensuales);
+			C.endl(1);
+			C.separador();
+			C.out("Meses: ");
+			C.espacio(1);
+			C.imprimir_fila(meses,6);
+			C.separador();
+			C.espacio(8);
+			C.imprimir_fila(ventas_mensuales, 6);
+			C.endl(1);
+			C.outS("Total anual: " + total_anual); C.espacio(70-13-((total_anual+"").length())-35);//Que locura ;)
+			C.outSln("Comision: " + comision);
+			C.endl(1);
+
+		}
+	else{
+
+		}
+
+	}//Mostrar
+
+
+
 	//Calcula la comision dependiendo de las ventas anuales del vendedor;
 public double calc_comision(){
-		if(totlal_anual <= 1500000){
+		if(total_anual <= 1500000){
 			return total_anual*(1.5/100);
 		}
-		if(total_anual > 1500000) || (total_anual <= 2150000){
+		if((total_anual > 1500000) || (total_anual <= 2150000)){
 			return total_anual*(4.75/100);
 		}
-		if(total_anual > 2150000) || (total_anual <= 2900000){
+		if((total_anual > 2150000) || (total_anual <= 2900000)){
 			return total_anual*(7.75/100);
 		}
-		if(total_anual > 2900000) || (total_anual <= 3350000){
+		if((total_anual > 2900000) || (total_anual <= 3350000)){
 			return total_anual*(9.6/100);
 		}
 		if(total_anual > 3350000){
