@@ -2,7 +2,7 @@ public class Vendedor{
 
 	private static int cant_vendedores;
 	private static double balance;
-	private int contador_codigo;
+	private static int contador_codigo;
 
 	private double comision;
 	private int codigo;
@@ -14,7 +14,7 @@ public class Vendedor{
 		//Constructor Default
 	public Vendedor(){
 		comision = 0.0;
-		codigo = generar_codigo;
+		codigo = generar_codigo();
 		primer_nombre = null;
 		segundo_nombre = null;
 		primer_apellido = null;
