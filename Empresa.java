@@ -1,9 +1,15 @@
+import java.util.ArrayList;
+
 public class Empresa{
 
-	public static Vendedor[] vend = new Vendedor[50];
+
 	public static int contador_vend = 0;
 
 	public static void main(String[] args){
+
+		//Declaracion del ArrayList en donde se guardara todos los vendedores
+		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+
 			byte opc;
 			do{
 			C.cls();
@@ -29,7 +35,7 @@ public class Empresa{
 				}
 			}
 			C.espacio(10);
-			opc = C.in_byte("Desea volver al Menu Inicial?");
+			opc = C.in_byte("Si desea volver al Menu Inicial ingrese 1: ");
 
 		}while(opc != 0);
 
@@ -53,9 +59,18 @@ public static byte menu(){
 
 
 	public static void ing_datos(){
-		Vendedor vend[contador_vend] = new Vendedor();
+		Vendedor nuevo = new Vendedor();
 		C.espacio(10);
-		vend[contador_vend].set_primer_nombre(C.in_String("Ingrese el Primer Nombre: "));
+		nuevo.set_primer_nombre(C.in_String("Primer Nombre: "));
+		C.endl(1);
+		nuevo.set_segundo_nombre(C.in_String("Segundo Nombre: "));
+		C.endl(1);
+
+
+
+		//Agregar el nuevo vendedor al vector
+		vendedores.add(nuevo);
+
 
 		}//ing_datos
 
