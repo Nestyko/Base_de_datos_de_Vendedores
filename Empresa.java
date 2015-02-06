@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Empresa{
 
+	public final static String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+	"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
 	public static int contador_vend = 0;
 
@@ -11,7 +13,7 @@ public class Empresa{
 
 		//Declaracion del ArrayList en donde se guardara todos los vendedores
 
-
+			boolean datos_exito;
 			byte opc;
 			do{
 			C.cls();
@@ -24,8 +26,20 @@ public class Empresa{
 
 					}
 				case 1:{
-					ing_datos();
-					break;
+
+					datos_exito = ing_datos();
+					if(datos_exito){
+						C.outSln("Los datos fueron cargados exitosamente");
+						C.espacio(10);
+						C.pausa();
+						opc = 1;
+					    continue;
+					    }
+					else
+						C.error("ERROR LOS DATOS NO SE CARGARON EXITOSAMENTE");
+						break;
+
+
 				}
 				case 2:{
 
@@ -60,20 +74,45 @@ public static byte menu(){
 	}//menu
 
 
-	public static void ing_datos(){
+	public static boolean ing_datos(){
 		Vendedor nuevo = new Vendedor();
 		C.espacio(10);
 		nuevo.set_primer_nombre(C.in_String("Primer Nombre: "));
 		C.endl(1);
+		C.espacio(10);
 		nuevo.set_segundo_nombre(C.in_String("Segundo Nombre: "));
 		C.endl(1);
+		C.espacio(10);
+		nuevo.set_primer_apellido(C.in_String("Primer Apellido: "));
+		C.endl(1);
+		C.espacio(10);
+		nuevo.set_segundo_apellido(C.in_String("Segundo Apellido: "));
+		C.endl(1);
+		C.espacio(10);
+		nuevo.set_sueldo_base(C.in_double("Sueldo Base: "));
+		C.endl(1);
+		double[] vent = new double[12];
+		try{
+		for(int i = 0;i<12;i++){
+			C.espacio(10);
+			vent[i] = C.in_double("Ventas de " + meses[i] + ": ");
+			C.endl(1);
+			}//for
+		}//try
+		catch(Exception e){
+			C.error();
+			C.pausa("Presione enter para continuar");
+			}
+		nuevo.set_ventas_mensuales(vent);
 
 
-
+		int prueba = vendedores.size();
 		//Agregar el nuevo vendedor al vector
 		vendedores.add(nuevo);
-
-
+		if(vendedores.size() == prueba+1)
+		return true;
+		else
+		return false;
 		}//ing_datos
 
 }//class

@@ -68,7 +68,6 @@ public static void endl(int n){
 }
 
 public static void error(String errorMsg){
-	cls();
 	System.out.println("E\tR\tR\tO\tR");
 	endl(1);
 	System.out.println("DESCRIPCION: " + errorMsg);
@@ -77,23 +76,23 @@ public static void error(String errorMsg){
 	KbInput.read();
 }
 
+
+
 public static void error(){
-	cls();
+	C.espacio(24);
 	System.out.println("E\tR\tR\tO\tR");
-	endl(1);
+	C.outCenln("PRESIONE ENTER PARA CONTINUAR");
 	KbInput.read();
 }
 
 public static void pausa(String msg){
-	System.out.println(msg);
 	C.endl(1);
-	System.out.println("PRESIONE ENTER PARA CONTINUAR");
+	C.outCenln(msg);
 	KbInput.read();
 }
 
 public static void pausa(){
 	C.endl(1);
-	System.out.println("PRESIONE ENTER PARA CONTINUAR");
 	KbInput.read();
 }
 

@@ -144,10 +144,22 @@ public void set_sueldo_base(double sueldo){
 	}
 
 public void set_ventas_mensuales(double[] ven){
+	if(ven.length == ventas_mensuales.length){
+	try{
 	this.ventas_mensuales = ven;
+	}//try
+	catch(Exception e){
+		C.error();
+		C.pausa();
+		}//catch
+	}//if
+	else
+	C.error("Los vectores no tienen las mismas direcciones");
+
 	}
 
 public void set_total_anual(double total){
+	System.out.println("El total fue ingresado manualmente");
 	this.total_anual = total;
 	}
 
