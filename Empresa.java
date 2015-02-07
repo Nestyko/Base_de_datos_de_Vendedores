@@ -134,6 +134,13 @@ public class Empresa{
 					continue;
 
 					}//case 9
+
+				case 10:{
+					acerca_de();
+					C.pausa("PRESIONE ENTER PARA CONTINUAR");
+					opc = 0;
+					continue;
+					}//case 10
 				default:{
 					C.error("Seleccion Invalida");
 					break;
@@ -167,8 +174,9 @@ public static byte menu(){
 				C.outSln("5.- Borrar a algun vendedor");
 				C.endl(2);
 				C.outSln("9.- Generar datos aleatorios");
+				C.outSln("10.- Acerca del Programa");
 				C.endl(1);
-				opc = C.in_byte("Seleccione una opcion: [ ]\b\b");
+				opc = C.in_byte("Seleccione una opcion: [  ]\b\b\b");
 		return opc;
 							}
 						else{
@@ -183,8 +191,9 @@ public static byte menu(){
 				C.outSln("1.- Ingresar datos de un Vendedor");
 				C.endl(2);
 				C.outSln("9.- Generar datos aleatorios");
+				C.outSln("10.- Acerca del Programa");
 				C.endl(1);
-				opc = C.in_byte("Seleccione una opcion: [ ]\b\b");
+				opc = C.in_byte("Seleccione una opcion: [  ]\b\b\b");
 		return opc;
 							}//else
 
@@ -325,5 +334,27 @@ public static void borrar_vendedor(int mod){
 
 
 	}//borrar_vendedor
+
+public static final void acerca_de(){
+	for(int i = 0;i<15;i++){
+		System.out.println("\n\n");
+		}
+	System.out.print("          ");
+	System.out.println("Primer Taller de Programacion 2");
+	System.out.println("\n\n");
+	System.out.print("          ");
+	System.out.println("Programa realizado por: Nestor Luis Tobon Arrieta");
+	System.out.print("          ");
+	System.out.println("Cedula de Identidad: 23.863.118");
+	System.out.print("          ");
+	System.out.println("Seccion N-511");
+	System.out.println("\n\n");
+	System.out.print("          ");
+	System.out.println("Repositorios de este programa disponibles en:\nURL: https://github.com/Nestyko/Base_de_datos_de_Vendedores");
+	System.out.print("\n");
+	System.out.print("          ");
+	System.out.println("Descarga Directa:\nURL: https://github.com/Nestyko/Base_de_datos_de_Vendedores/archive/master.zip");
+
+	}//acerca_de
 
 }//class
