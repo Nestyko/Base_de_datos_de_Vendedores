@@ -33,10 +33,10 @@ public class Vendedor{
 	String segundo, String primer_a, String segundo_a, double sueldo, double[] ven_men){
 
 		this.codigo = generar_codigo();
-		this.primer_nombre = primer;
-		this.segundo_nombre = segundo;
-		this.primer_apellido = primer_a;
-		this.segundo_apellido = segundo_a;
+		this.primer_nombre = primer.trim().toUpperCase();
+		this.segundo_nombre = segundo.trim().toUpperCase();
+		this.primer_apellido = primer_a.trim().toUpperCase();
+		this.segundo_apellido = segundo_a.trim().toUpperCase();
 		this.sueldo_base = sueldo;
 		this.ventas_mensuales = ven_men;
 		double total = 0.0;
@@ -45,6 +45,8 @@ public class Vendedor{
 		this.total_anual = total;
 		this.comision = calc_comision();
 		balance += (total_anual - (comision+sueldo_base));
+
+		validar_anonimato();
 
 
 		}// TODAS LAS VARIABLES
@@ -84,8 +86,17 @@ public void Mostrar(){
 			C.outSln("Codigo: " + codigo);
 			C.outSln("Vendedor: " + primer_nombre + " " + segundo_nombre + " " + primer_apellido + " " + segundo_apellido);
 			C.outSln("Sueldo base: " + sueldo_base);
-			C.outSln("Sueldo + comision: " +sueldo_base+ comision);
+			C.outSln("Sueldo + comision: " + (sueldo_base+ comision) );
+			boolean exceso_digitos = false;
 
+			for(int i = 0; i < (ventas_mensuales.length);i++)
+			{
+				if(((ventas_mensuales[i]+"").length()) > 10){
+					exceso_digitos = true;
+					}
+
+				}//for
+			if(!exceso_digitos){
 			//Imprimir los meses en forma de Fila
 			C.separador();
 			C.out("Meses: ");
@@ -106,7 +117,20 @@ public void Mostrar(){
 			C.outS("Total anual: " + total_anual); C.espacio(70-13-((total_anual+"").length())-35);//Que locura ;)
 			C.outSln("Comision: " + comision);
 			C.endl(1);
-			C.pausa();
+			C.pausa("PRESIONE ENTER PARA EL SIGIENTE");
+		}//if
+			else{
+				C.endl(2);
+				for(int i = 0; i < ventas_mensuales.length;i++){
+					C.outSln(meses[i] + ": " + (ventas_mensuales[i]+""));
+					}//for
+				C.endl(1);
+
+				C.outSln("Total anual: " + (total_anual+""));
+				C.outSln("Comision: " + (comision+""));
+				C.pausa();
+
+				}//else
 
 
 	}//Mostrar
@@ -122,6 +146,7 @@ public void Mostrar(){
 			C.endl(2);
 			C.outSln("Total de Ganancia: " + (balance-(balance*0.12)));
 			C.endl(2);
+			C.pausa("PRESIONE ENTER PARA CONTINUAR");
 
 		}
 
@@ -205,23 +230,25 @@ public void set_codigo(int cod){
 	}//set_codigo
 
 public void set_primer_nombre(String nombre){
-	this.primer_nombre = nombre;
+	this.primer_nombre = nombre.trim().toUpperCase();
 	}//set_primer_nombre
 
 public void set_segundo_nombre(String nombre){
-	this.segundo_nombre = nombre;
+	this.segundo_nombre = nombre.trim().toUpperCase();
 	}
 
 public void set_primer_apellido(String apellido){
-	this.primer_apellido = apellido;
+	this.primer_apellido = apellido.trim().toUpperCase();
 	}
 
 public void set_segundo_apellido(String apellido){
-	this.segundo_apellido = apellido;
+	this.segundo_apellido = apellido.trim().toUpperCase();
 	}
 
 public void set_sueldo_base(double sueldo){
+	balance -= this.sueldo_base;
 	this.sueldo_base = sueldo;
+	balance += this.sueldo_base;
 	}
 
 public void set_ventas_mensuales(double[] ven){
@@ -239,16 +266,29 @@ public void set_ventas_mensuales(double[] ven){
 
 	}
 
-public void set_calc_total_anual(double[] ventas_mensuales){
+public void set_calc_total_anual(){
 	double total = 0.0;
-			for(int i = 0;i<ventas_mensuales.length;i++)
-				total += ventas_mensuales[i];
+			for(int i = 0;i<this.ventas_mensuales.length;i++)
+				total += this.ventas_mensuales[i];
 		this.total_anual = total;
 	}
 
 public void set_total_anual(double total){
 	System.out.println("El total fue ingresado manualmente");
 	this.total_anual = total;
+	}
+
+public void set_calc_comision(){
+	this.comision = calc_comision();
+	}
+
+public void validar_anonimato(){
+	if((this.primer_nombre.trim().length() == 0) && (this.segundo_nombre.trim().length() == 0)
+		&& (this.primer_apellido.trim().length() == 0) && (this.segundo_apellido.trim().length() == 0)){
+				//System.out.println("La cadena esta vacia");
+				this.primer_nombre = "MISTER";
+				this.segundo_nombre = "ANONIMO";
+			}
 	}
 
 }//class

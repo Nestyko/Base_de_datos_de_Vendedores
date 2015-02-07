@@ -7,7 +7,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
 public class Empresa{
 
 	public final static String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
@@ -23,9 +22,6 @@ public class Empresa{
 
 		//Inicializar las varialbes estaticas de la clase Vendedor
 		Vendedor.comenzar();
-
-
-
 
 
 			boolean datos_exito;
@@ -46,8 +42,8 @@ public class Empresa{
 					if(datos_exito){
 						C.outSln("Los datos fueron cargados exitosamente");
 						C.espacio(10);
-						C.pausa();
-						opc = 1;
+						C.pausa("PRESIONE ENTER PARA CONTINUAR");
+						opc = 0;
 					    continue;
 					    }
 					else
@@ -61,26 +57,29 @@ public class Empresa{
 						for(int i = 0; i < vendedores.size();i++){
 						vendedores.get(i).Mostrar();
 						}//for
+						opc = 0;
+						continue;
 					}//if
 					else{
 						C.errorCen("No hay datos cargados");
-						opc = 1;
+						opc = 0;
 						continue;
 						}
 
-					break;
 				}//case 2
 				case 3:{
 					if(vendedores.size() > 0){
 						Vendedor.Mostrar_balance();
+						opc = 0;
+						continue;
 						}
 					else{
 					C.errorCen("No hay datos cargados");
-						opc = 1;
+						opc = 0;
 						continue;
 							}
 
-					break;
+
 
 					}//case 3
 				case 4:{
@@ -90,10 +89,43 @@ public class Empresa{
 							C.endl(1);
 							}//for
 							C.espacio(10);
-							byte mod = C.in_Byte("Seleccione un vededor para modificar: ");
+							byte mod = C.in_byte("Seleccione un vededor para modificar: ");
+							C.endl(1);
+									try{
+									mod_datos(mod-1);
+								}//try
+								catch(Exception e){
+									C.errorCen("NUMERO DE VENDEDOR INVALIDO, POR FAVOR INTENTE CON UN NUMERO ENTRE 1 Y EL NUMERO ACUTAL DE VENDEDORES REGISTRADOS");
+									opc = 0;
+									continue;
+									}//catch
+
 
 							C.pausa();
+							opc = 0;
+							continue;
 					}//case 4
+					case 5:{
+							for(int i = 0; i < vendedores.size();i++){
+							C.outSln("Vendedor " + (i+1) + ": " + vendedores.get(i).get_nombre_completo());
+							C.outSln("Codigo: " + vendedores.get(i).get_codigo());
+							C.endl(1);
+							}//for
+							C.espacio(10);
+							byte mod = C.in_byte("Seleccione un vededor para borrar: ");
+							C.endl(1);
+									try{
+									borrar_vendedor(mod-1);
+								}//try
+								catch(Exception e){
+									C.errorCen("NUMERO DE VENDEDOR INVALIDO, POR FAVOR INTENTE CON UN NUMERO ENTRE 1 Y EL NUMERO ACUTAL DE VENDEDORES REGISTRADOS");
+									opc = 0;
+									continue;
+									}//catch
+							opc = 0;
+							continue;
+						}//case 5
+
 
 
 				case 9:{
@@ -132,6 +164,7 @@ public static byte menu(){
 				C.outSln("2.- Mostrar datos de los Vendedores");
 				C.outSln("3.- Mostrar las ganancias obtenidas por la empresa");
 				C.outSln("4.- Modificar datos de algun vendedor");
+				C.outSln("5.- Borrar a algun vendedor");
 				C.endl(2);
 				C.outSln("9.- Generar datos aleatorios");
 				C.endl(1);
@@ -160,24 +193,24 @@ public static byte menu(){
 
 	public static boolean ing_datos(){
 
-		String primer_nombre = (C.in_String("Primer Nombre: "));
+		String primer_nombre = (C.solo_letras(C.in_String("Primer Nombre: ")));
 		C.endl(1);
 
-		String segundo_nombre = (C.in_String("Segundo Nombre: "));
+		String segundo_nombre = (C.solo_letras(C.in_String("Segundo Nombre: ")));
 		C.endl(1);
 
-		String primer_apellido = (C.in_String("Primer Apellido: "));
+		String primer_apellido = (C.solo_letras(C.in_String("Primer Apellido: ")));
 		C.endl(1);
 
-		String segundo_apellido = (C.in_String("Segundo Apellido: "));
+		String segundo_apellido = (C.solo_letras(C.in_String("Segundo Apellido: ")));
 		C.endl(1);
 
-		double sueldo_base = (C.in_double("Sueldo Base: "));
+		double sueldo_base = C.unsigned((C.in_double("Sueldo Base: ")));
 		C.endl(1);
 		double[] vent = new double[12];
 		try{
 		for(int i = 0;i<12;i++){
-			vent[i] = C.in_double("Ventas de " + meses[i] + ": ");
+			vent[i] = C.unsigned(C.in_double("Ventas de " + meses[i] + ": "));
 			C.endl(1);
 			}//for
 		}//try
@@ -188,6 +221,8 @@ public static byte menu(){
 
 		Vendedor nuevo = new Vendedor(primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,
 			sueldo_base, vent);
+
+		nuevo.validar_anonimato();
 
 
 		int prueba = vendedores.size();
@@ -213,12 +248,12 @@ public static byte menu(){
 				String segundo_apellido = "";
 				C.endl(1);
 
-				double sueldo_base = aleatorio.nextInt(100000);
+				double sueldo_base = aleatorio.nextInt(200000);
 				C.endl(1);
 				double[] vent = new double[12];
 				try{
 				for(int i = 0;i<12;i++){
-					vent[i] = aleatorio.nextInt(9999999);
+					vent[i] = aleatorio.nextInt(400000);
 					C.endl(1);
 					}//for
 				}//try
@@ -240,23 +275,23 @@ public static byte menu(){
 				return false;
 		}//ing_datos_aleatorios
 
-public static void mod_datos(byte mod){
+public static void mod_datos(int mod){
 
-		vendedores.get(mod).set_primer_nombre(C.in_String("Primer Nombre: ");
+		vendedores.get(mod).set_primer_nombre(C.solo_letras(C.in_String("Primer Nombre: ")));
 		C.endl(1);
-		vendedores.get(mod).set_segundo_nombre(C.in_String("Segundo Nombre: ");
+		vendedores.get(mod).set_segundo_nombre(C.solo_letras(C.in_String("Segundo Nombre: ")));
 		C.endl(1);
-		vendedores.get(mod).set_primer_apellido(C.in_String("Primer Apellido: ");
+		vendedores.get(mod).set_primer_apellido(C.solo_letras(C.in_String("Primer Apellido: ")));
 		C.endl(1);
-		vendedores.get(mod).set_segundo_apellido(C.in_String("Segundo Apellido: ");
+		vendedores.get(mod).set_segundo_apellido(C.solo_letras(C.in_String("Segundo Apellido: ")));
 		C.endl(1);
-		vendedores.get(mod).set_sueldo_base(C.in_double("Sueldo Base: ");
+		vendedores.get(mod).set_sueldo_base(C.unsigned(C.in_double("Sueldo Base: ")));
 		C.endl(1);
 
 		double[] vent = new double[12];
 		try{
 		for(int i = 0;i<12;i++){
-			vent[i] = C.in_double("Ventas de " + meses[i] + ": ");
+			vent[i] = C.unsigned(C.in_double("Ventas de " + meses[i] + ": "));
 			C.endl(1);
 			}//for
 		}//try
@@ -266,10 +301,29 @@ public static void mod_datos(byte mod){
 			}
 
 		vendedores.get(mod).set_ventas_mensuales(vent);
+		vendedores.get(mod).set_calc_total_anual();
+		vendedores.get(mod).set_calc_comision();
+		vendedores.get(mod).validar_anonimato();
+
 
 		//Agregar el nuevo vendedor al vector
 
 
-		}//ing_datos
+		}//mod_datos
+
+public static void borrar_vendedor(int mod){
+
+	//Devolver a 0 todas sus ganancias
+	vendedores.get(mod).set_sueldo_base(0);
+	double[] vent = new double[12];
+	vendedores.get(mod).set_ventas_mensuales(vent);
+	vendedores.get(mod).set_calc_total_anual();
+	vendedores.get(mod).set_calc_comision();
+
+	//Borrar al vendedor
+	vendedores.remove(mod);
+
+
+	}//borrar_vendedor
 
 }//class

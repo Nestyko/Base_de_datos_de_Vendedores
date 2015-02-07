@@ -6,7 +6,7 @@ public static void cls(){
 	System.out.println("\n");
 }
 
-//Agrega una sangría al texto
+//Agrega una sangria al texto
 public static void outS(String msg){
 	espacio(10);
 	System.out.print(msg);
@@ -485,8 +485,7 @@ public static  void imprimir_fila(double[] vec){
 
 	public static int unsigned (int a){
 		while (a < 0){
-			System.out.print("Por favor, ingrese un numero positivo: ");
-			a = Integer.parseInt(KbInput.read());
+			a = in_int("Por favor, ingrese un numero positivo: ");
 			endl(1);
 			}//while
 			return a;
@@ -494,8 +493,7 @@ public static  void imprimir_fila(double[] vec){
 
 	public static double unsigned (double a){
 		while (a < 0){
-			System.out.print("Por favor, ingrese un numero positivo: ");
-			a = Double.parseDouble(KbInput.read());
+			a = in_double("Por favor, ingrese un numero positivo: ");
 			endl(1);
 			}//while
 			return a;
@@ -503,8 +501,7 @@ public static  void imprimir_fila(double[] vec){
 
 	public static byte unsigned (byte a){
 		while (a < 0){
-			System.out.print("Por favor, ingrese un numero positivo: ");
-			a = Byte.parseByte(KbInput.read());
+			a = in_byte("Por favor, ingrese un numero positivo: ");
 			endl(1);
 			}//while
 			return a;
@@ -512,8 +509,7 @@ public static  void imprimir_fila(double[] vec){
 
 	public static short unsigned (short a){
 		while (a < 0){
-			System.out.print("Por favor, ingrese un numero positivo: ");
-			a = Byte.parseByte(KbInput.read());
+			a = in_short("Por favor, ingrese un numero positivo: ");
 			endl(1);
 			}//while
 			return a;
@@ -521,14 +517,47 @@ public static  void imprimir_fila(double[] vec){
 
 	public static long unsigned (long a){
 		while (a < 0){
-			System.out.print("Por favor, ingrese un numero positivo: ");
-			a = Long.parseLong(KbInput.read());
+			a = in_long("Por favor, ingrese un numero positivo: ");
 			endl(1);
 
 			}//while
 
 	return a;
 	}//unsigned
+
+				//Validar que sean solo letras
+
+	public static String solo_letras(String a){
+
+		boolean numero = false;
+		do{
+			if(a.length() == 0){
+							numero = false;
+				}//if
+		for(int i = 0; i< a.length();i++){
+			switch(a.charAt(i)){
+				case '0': numero = true; break;
+				case '1': numero = true;break;
+				case '2': numero = true;break;
+				case '3': numero = true;break;
+				case '4': numero = true;break;
+				case '5': numero = true;break;
+				case '6': numero = true;break;
+				case '7': numero = true;break;
+				case '8': numero = true;break;
+				case '9': numero = true;break;
+				default: numero = false;break;
+				}//switch
+			}//for
+		if(numero){
+			a = in_String("Por favor ingrese solo letras: ");
+		}//if
+		}while ( numero);
+
+
+
+	return a;
+		}//solo_letras
 
 
 
