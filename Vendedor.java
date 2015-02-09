@@ -8,6 +8,7 @@ public class Vendedor{
 	public final static String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 	"Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
+
 	private double comision;
 	private int codigo;
 	private String primer_nombre,segundo_nombre,primer_apellido, segundo_apellido;
