@@ -6,6 +6,16 @@ public static void cls(){
 	System.out.println("\n");
 }
 
+public static void espacio_atras(int a){
+	for(int i = 0;i <a;i++){
+		System.out.print(bespacio());
+		}//for
+	}//espacio_atras
+
+public static String bespacio(){
+			return "\b";
+	}
+
 //Agrega una sangria al texto
 public static void outS(String msg){
 	espacio(10);

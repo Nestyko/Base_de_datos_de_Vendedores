@@ -141,7 +141,7 @@ public void Mostrar(){
 			C.endl(1);
 			C.separador();
 			C.endl(1);
-			C.outSln("Ganancia sin retenciones: " + balance);
+			C.outSln("Ganancia sin impuestos: " + balance);
 			C.outSln("Total de impuesto: " + (balance*0.12));
 			C.endl(2);
 			C.outSln("Total de Ganancia: " + (balance-(balance*0.12)));
@@ -157,13 +157,13 @@ public double calc_comision(){
 		if(total_anual <= 1500000){
 			return total_anual*(1.5/100);
 		}
-		if((total_anual > 1500000) || (total_anual <= 2150000)){
+		if((total_anual > 1500000) && (total_anual <= 2150000)){
 			return total_anual*(4.75/100);
 		}
-		if((total_anual > 2150000) || (total_anual <= 2900000)){
+		if((total_anual > 2150000) && (total_anual <= 2900000)){
 			return total_anual*(7.75/100);
 		}
-		if((total_anual > 2900000) || (total_anual <= 3350000)){
+		if((total_anual > 2900000) && (total_anual <= 3350000)){
 			return total_anual*(9.6/100);
 		}
 		if(total_anual > 3350000){
@@ -246,9 +246,7 @@ public void set_segundo_apellido(String apellido){
 	}
 
 public void set_sueldo_base(double sueldo){
-	balance -= this.sueldo_base;
 	this.sueldo_base = sueldo;
-	balance += this.sueldo_base;
 	}
 
 public void set_ventas_mensuales(double[] ven){
@@ -280,6 +278,13 @@ public void set_total_anual(double total){
 
 public void set_calc_comision(){
 	this.comision = calc_comision();
+	}
+public void remover_balance(){
+	balance -= (total_anual-(comision+sueldo_base));
+	}
+
+public void set_calc_nuevo_balance(){
+	balance += (total_anual-(comision+sueldo_base));
 	}
 
 public void validar_anonimato(){

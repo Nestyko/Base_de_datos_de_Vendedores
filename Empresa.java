@@ -83,6 +83,11 @@ public class Empresa{
 
 					}//case 3
 				case 4:{
+					if(vendedores.size() == 0){
+												C.errorCen("No hay datos cargados");
+											opc = 0;
+											continue;
+					}//if
 						for(int i = 0; i < vendedores.size();i++){
 							C.outSln("Vendedor " + (i+1) + ": " + vendedores.get(i).get_nombre_completo());
 							C.outSln("Codigo: " + vendedores.get(i).get_codigo());
@@ -106,13 +111,20 @@ public class Empresa{
 							continue;
 					}//case 4
 					case 5:{
+						if(vendedores.size() == 0){
+							C.errorCen("No hay datos cargados");
+						opc = 0;
+						continue;
+					}//if
 							for(int i = 0; i < vendedores.size();i++){
 							C.outSln("Vendedor " + (i+1) + ": " + vendedores.get(i).get_nombre_completo());
 							C.outSln("Codigo: " + vendedores.get(i).get_codigo());
 							C.endl(1);
 							}//for
-							C.espacio(10);
-							byte mod = C.in_byte("Seleccione un vededor para borrar: ");
+							//C.espacio(10);
+							byte mod = C.unsigned(C.in_byte("Seleccione un vededor para borrar: [  ] Presione 0 para cancelar\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b" ));
+
+							if (mod != 0){
 							C.endl(1);
 									try{
 									borrar_vendedor(mod-1);
@@ -122,8 +134,10 @@ public class Empresa{
 									opc = 0;
 									continue;
 									}//catch
+							}//if
 							opc = 0;
 							continue;
+
 						}//case 5
 
 
@@ -142,8 +156,9 @@ public class Empresa{
 					continue;
 					}//case 10
 				default:{
-					C.error("Seleccion Invalida");
-					break;
+					C.errorCen("Seleccion Invalida");
+					opc = 0;
+					continue;
 				}//default
 			}//switch
 			C.espacio(10);
@@ -286,6 +301,8 @@ public static byte menu(){
 
 public static void mod_datos(int mod){
 
+		vendedores.get(mod).remover_balance();
+
 		vendedores.get(mod).set_primer_nombre(C.solo_letras(C.in_String("Primer Nombre: ")));
 		C.endl(1);
 		vendedores.get(mod).set_segundo_nombre(C.solo_letras(C.in_String("Segundo Nombre: ")));
@@ -312,6 +329,7 @@ public static void mod_datos(int mod){
 		vendedores.get(mod).set_ventas_mensuales(vent);
 		vendedores.get(mod).set_calc_total_anual();
 		vendedores.get(mod).set_calc_comision();
+		vendedores.get(mod).set_calc_nuevo_balance();
 		vendedores.get(mod).validar_anonimato();
 
 
@@ -323,11 +341,13 @@ public static void mod_datos(int mod){
 public static void borrar_vendedor(int mod){
 
 	//Devolver a 0 todas sus ganancias
-	vendedores.get(mod).set_sueldo_base(0);
+	vendedores.get(mod).remover_balance();
+	/*vendedores.get(mod).set_sueldo_base(0);
 	double[] vent = new double[12];
 	vendedores.get(mod).set_ventas_mensuales(vent);
 	vendedores.get(mod).set_calc_total_anual();
-	vendedores.get(mod).set_calc_comision();
+	vendedores.get(mod).set_calc_comision();*/
+
 
 	//Borrar al vendedor
 	vendedores.remove(mod);
